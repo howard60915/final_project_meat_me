@@ -1,0 +1,17 @@
+<h1>New Site</h1>
+
+<%= form_for [:admin, @site] do |f| %>
+  <%= f.label :name, "名稱" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :address, "地址" %>
+  <%= f.text_field :address %>
+
+  <%= f.label :tel, "電話" %>
+  <%= f.text_field :tel %>
+
+  <%= f.label :hotspot, "熱門" %>
+  <%= f.check_box :hotspot %>
+
+  <%= f.submit "保存" %>
+<% end %>
