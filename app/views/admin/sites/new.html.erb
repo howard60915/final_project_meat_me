@@ -6,7 +6,7 @@
   <% end %>
 <% end %>
 
-<%= form_for [:admin, @site] do |f| %>
+<%= form_for [:admin, @site], html: { multipart: true } do |f| %>
   <%= f.label :name, "名稱" %>
   <%= f.text_field :name %>
 
@@ -21,6 +21,9 @@
 
   <%= f.label :hotspot, "熱門" %>
   <%= f.check_box :hotspot %>
+
+  <%= f.label :pictures, "上傳圖片" %>
+  <%= file_field_tag "images[]", type: :file, multiple: true %>
 
   <%= f.submit "保存" %>
 <% end %>

@@ -4,5 +4,10 @@
 <ul>
   <% @sites.each do |site| %>
   <li><%= site.name %></li>
+  <li>
+    <% site.pictures.each do |pic| %>
+      <%= image_tag (pic.image.url(:medium)) %>
+    <% end %>
+  </li>
   <% end %>
 </ul>
