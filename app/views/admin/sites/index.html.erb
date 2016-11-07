@@ -3,11 +3,16 @@
 
 <ul>
   <% @sites.each do |site| %>
-  <li><%= site.name %></li>
-  <li>
-    <% site.pictures.each do |pic| %>
-      <%= image_tag (pic.image.url(:medium)) %>
+    <li>
+      <%= site.name %>
+      <%= link_to "修改", edit_admin_site_path(site) %>
+    </li>
+    <% if site.pictures.exists? %>
+      <li>
+        <% site.pictures.each do |pic| %>
+          <%= image_tag (pic.image.url(:medium)) %>
+        <% end %>
+      </li>
     <% end %>
-  </li>
   <% end %>
 </ul>

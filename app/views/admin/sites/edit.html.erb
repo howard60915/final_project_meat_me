@@ -1,0 +1,23 @@
+<%= form_for [:admin, @site], html: { multipart: true } do |f| %>
+  <%= f.label :name, "名稱" %>
+  <%= f.text_field :name %>
+
+  <%= f.label :address, "地址" %>
+  <%= f.text_field :address %>
+
+  <%= f.label :duration, "營業時間" %>
+  <%= f.text_field :duration %>
+
+  <%= f.label :tel, "電話" %>
+  <%= f.text_field :tel %>
+
+  <%= f.label :hotspot, "熱門" %>
+  <%= f.check_box :hotspot %>
+
+  <%= check_box_tag "destroy_picture", "1" %> 刪除圖片
+
+  <%= f.label :pictures, "上傳圖片" %>
+  <%= file_field_tag "images[]", type: :file, multiple: true %>
+
+  <%= f.submit "保存" %>
+<% end %>
