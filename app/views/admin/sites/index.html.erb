@@ -6,6 +6,7 @@
     <li>
       <%= site.name %>
       <%= link_to "修改", edit_admin_site_path(site) %>
+      <%= link_to "刪除景點", admin_site_path(site), :method => :delete %>
     </li>
     <% if site.pictures.exists? %>
       <li>

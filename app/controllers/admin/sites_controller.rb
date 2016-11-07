@@ -46,6 +46,13 @@ class Admin::SitesController < Admin::BaseController
     end
   end
 
+  def destroy
+    @site = Site.find(params[:id])
+    @site.destroy
+    flash[:notice] = "刪除成功！"
+    redirect_to admin_sites_path
+  end
+
   private
   def params_site
     params.require(:site).permit(:name, :address, :tel, :hotspot, :pictures, :duration)
