@@ -23,3 +23,5 @@
 # Ignore database.yml & secrets.yml
 /config/database.yml
 /config/secrets.yml
+
+/public/images

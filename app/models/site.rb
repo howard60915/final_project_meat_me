@@ -1,6 +1,7 @@
 class Site < ApplicationRecord
   validates_presence_of :name, :address, :tel
   belongs_to :user
+<<<<<<< HEAD
 
 
 
@@ -18,4 +19,7 @@ class Site < ApplicationRecord
 
 
 
+=======
+  has_many :pictures, :dependent => :destroy
+>>>>>>> 655b7d2d9f663983d14470eb311719fbb65faaea
 end
