@@ -4,7 +4,15 @@
 <ul>
   <% @sites.each do |site| %>
     <li>
+      <% if site.hotspot %>
+        <span>熱門景點</span>
+      <% end %>
       <%= site.name %>
+      <%= form_for [:admin, site] do |f| %>
+        <%= f.label :hotspot, "熱門" %>
+        <%= f.check_box :hotspot %>
+        <%= f.submit "保存" %>
+      <% end %>
       <%= link_to "修改", edit_admin_site_path(site) %>
       <%= link_to "刪除景點", admin_site_path(site), :method => :delete %>
     </li>
