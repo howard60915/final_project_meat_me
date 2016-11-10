@@ -1,7 +1,5 @@
 class Api::V1::SitesController < ApiController
 
-  before_action :authenticate_user!, :only => [:create]
-
   def index
     @sites = Site.all
     @users = User.all
@@ -14,13 +12,13 @@ class Api::V1::SitesController < ApiController
     @user = @site.user
 
     render :json => {
-        :site => @site.api_info ,
+        :site => @site.api_info,
         :user => @user.api_info
-    }
+      }
+
   end
 
   def create
-    
     user = User.find_by_authentication_token(params[:auth_token])
 
     @site = user.sites.new(site_params)
@@ -39,10 +37,9 @@ class Api::V1::SitesController < ApiController
   end
 
   def update
-    site_user = User.find_by_authentication_token(params[:auth_token])
 
-    @site = Site.find(params[:id])
-    
+    site_user = User.find_by_authentication_token(params[:auth_token])
+     @site = Site.find(params[:id])
     if @site.user == site_user
        @site.update(site_params)
 
@@ -80,6 +77,9 @@ class Api::V1::SitesController < ApiController
   def site_params
     params.require(:site).permit(:name, :address, :tel, :hotspot, :pictures, :duration)
   end
+
+
+  
 
 
 
