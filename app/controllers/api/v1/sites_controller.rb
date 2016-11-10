@@ -11,16 +11,16 @@ class Api::V1::SitesController < ApiController
 
   def show
     @site = Site.find(params[:id])
-    @user = User.find(params[:user_id])
+    @user = @site.user
 
     render :json => {
-        :site => @site.map{  |s| s.api_info },
-        :user => @user.map { |u| u.api_info }
-
+        :site => @site.api_info ,
+        :user => @user.api_info
     }
   end
 
   def create
+    
     user = User.find_by_authentication_token(params[:auth_token])
 
     @site = user.sites.new(site_params)
@@ -39,8 +39,10 @@ class Api::V1::SitesController < ApiController
   end
 
   def update
-    @site = Site.find(params[:id])
     site_user = User.find_by_authentication_token(params[:auth_token])
+
+    @site = Site.find(params[:id])
+    
     if @site.user == site_user
        @site.update(site_params)
 
