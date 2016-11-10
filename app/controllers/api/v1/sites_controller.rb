@@ -4,7 +4,7 @@ class Api::V1::SitesController < ApiController
 
   def index
     @sites = Site.all
-    @user = User.all
+    @users = User.all
 
     render :json => { :users => @users.map{ |u| u.api_info }, :sites => @sites.map{|s| s.api_info } }
   end
@@ -22,10 +22,10 @@ class Api::V1::SitesController < ApiController
 
   def create
     @site = Site.new(site_params)
-    
+
     user = User.find_by_authentication_token(params[:auth_token])
 
-    if @site.save  
+    if @site.save
       render :json => {
           :status => 200,
           :message => "Site created",
@@ -43,7 +43,7 @@ class Api::V1::SitesController < ApiController
     if @site.user == site_user
        @site.update(site_params)
 
-       render :json => { 
+       render :json => {
             :status => 200,
             :message => "Site update success",
             :auth_token => site_user.authentication_token,
@@ -51,14 +51,14 @@ class Api::V1::SitesController < ApiController
         }
     else
       render :json => { :message => "Site update failed" }, :status => 401
-    end  
+    end
   end
 
 
   def destroy
       @site = Site.find(params[:id])
       site_user = User.find_by_authentication_token(params[:auth_token])
-      
+
       if @site.user == site_user
         @site.destroy
 
@@ -68,7 +68,7 @@ class Api::V1::SitesController < ApiController
                 }
       else
         render :json => { :message => "Site destroy failed" }, :status => 401
-      end 
+      end
   end
 
 
@@ -78,6 +78,6 @@ class Api::V1::SitesController < ApiController
     params.require(:site).permit(:name, :address, :tel, :hotspot, :pictures, :duration)
   end
 
-  
 
-end  
+
+end
