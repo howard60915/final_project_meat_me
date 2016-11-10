@@ -33,6 +33,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem "paperclip", "~> 5.0.0"
 
+gem 'capistrano-rails', :group => :development
+gem 'capistrano-passenger', :group => :development
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

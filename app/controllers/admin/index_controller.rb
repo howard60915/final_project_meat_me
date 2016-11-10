@@ -1,4 +1,5 @@
-class Admin::IndexController < Admin::BaseController
+class Admin::IndexController < ApplicationController
+  before_action :authenticate_user!
   def index
   end
 end
