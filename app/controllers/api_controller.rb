@@ -1,6 +1,6 @@
 class ApiController < ActionController::Base
 
-  before_action :authenticate_user_from_token!
+  #before_action :authenticate_user_from_token!
   before_action :enabled_cors
   before_action :set_default_format
   # after_action :add_after_action
