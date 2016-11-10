@@ -11,13 +11,13 @@ class Api::V1::SitesController < ApiController
 
   def show
     @site = Site.find(params[:id])
-    @user = User.find(params[:user_id])
+    @user = @site.user
 
     render :json => {
-        :site => @site.map{  |s| s.api_info },
-        :user => @user.map { |u| u.api_info }
+        :site => @site.api_info,
+        :user => @user.api_info
+      }
 
-    }
   end
 
   def create
