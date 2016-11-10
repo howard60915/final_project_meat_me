@@ -12,7 +12,8 @@ class Site < ApplicationRecord
       :address => self.address,
       :tel => self.tel,
       :duration => self.duration,
-      :hotspot => self.hotspot
+      :hotspot => self.hotspot,
+      :picture => self.picture.image.url
     }
   end
 
