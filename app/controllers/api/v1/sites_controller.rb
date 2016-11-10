@@ -1,6 +1,6 @@
 class Api::V1::SitesController < ApiController
 
-  #before_action :authenticate_user!, :only => [:create]
+  before_action :authenticate_user!, :only => [:create]
 
   def index
     @sites = Site.all
