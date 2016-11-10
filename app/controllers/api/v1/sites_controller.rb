@@ -1,7 +1,5 @@
 class Api::V1::SitesController < ApiController
 
-  before_action :authenticate_user!, :only => [:create]
-
   def index
     @sites = Site.all
     @users = User.all
@@ -79,6 +77,9 @@ class Api::V1::SitesController < ApiController
   def site_params
     params.require(:site).permit(:name, :address, :tel, :hotspot, :pictures, :duration)
   end
+
+
+  
 
 
 
