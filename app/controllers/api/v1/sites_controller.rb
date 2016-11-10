@@ -21,9 +21,10 @@ class Api::V1::SitesController < ApiController
   end
 
   def create
-    @site = Site.new(site_params)
-
     user = User.find_by_authentication_token(params[:auth_token])
+
+    @site = user.sites.new(site_params)
+
 
     if @site.save
       render :json => {
