@@ -39,8 +39,9 @@ class Api::V1::SitesController < ApiController
   end
 
   def update
-    @site = Site.find(params[:id])
+
     site_user = User.find_by_authentication_token(params[:auth_token])
+     @site = Site.find(params[:id])
     if @site.user == site_user
        @site.update(site_params)
 
