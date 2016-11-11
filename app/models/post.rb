@@ -8,11 +8,11 @@ class Post < ApplicationRecord
 
   def api_info
     return {
-      :id => self.id,
-      :title => self.title,
-      :content => self.content,
-      :poster => self.user,
-      :photo => self.photo.url
+      :articleId => self.id.to_s,
+      :articletitle => self.title,
+      :articlecontent => self.content,
+      :articleAuthor => self.user,
+      :articleImage => self.photo.url
     }
   end
 

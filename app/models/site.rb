@@ -10,12 +10,12 @@ class Site < ApplicationRecord
   def api_info
     return {
       :id => self.id,
-      :name => self.name,
+      :siteName => self.name,
       :address => self.address,
-      :tel => self.tel,
+      :telNumber => self.tel,
       :duration => self.duration,
-      :hotspot => self.hotspot,
-      :picture => self.pictures.map{ |p| p.image.url }
+      :hotSpot => self.hotspot,
+      :sitePicture => self.pictures.map{ |p| p.image.url }
     }
   end
 
