@@ -11,11 +11,7 @@ class Admin::SitesController < Admin::BaseController
     @site = current_user.sites.new(params_site)
     if @site.save
       flash[:notice] = "景點創建成功！"
-      if params[:images]
-        params[:images].each { |image|
-          @site.pictures.create(image: image)
-        }
-      end
+      Array(params[:images]).each { |image| @site.pictures.create(image: image) }
       redirect_to admin_sites_path
     else
       flash[:alert] = "景點創建失敗！"
@@ -34,11 +30,7 @@ class Admin::SitesController < Admin::BaseController
     end
     if @site.update(params_site)
       flash[:notice] = "修改成功！"
-      if params[:images]
-        params[:images].each { |image|
-          @site.pictures.create(image: image)
-        }
-      end
+      Array(params[:images]).each { |image| @site.pictures.create(image: image) }
       redirect_to admin_sites_path
     else
       flash[:alert] = "修改失敗！"
