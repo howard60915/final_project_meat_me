@@ -11,15 +11,14 @@ class Api::V1::PostsController < ApiController
 
   def show
     @post = Post.find(params[:id])
-    @user = @post.user
 
-    render :json => {:post => @post.api_info, :user => @user.api_info}
+    render :json => { :article => @post.api_info }
 
   end
 
   def create
-    user = User.find_by_authentication_token(params[:auth_token])
-    @post = user.posts.new(post_params)
+    @post = current_user.posts.new(post_params)
+
     if @post.save
       render :json => {
                 :status =>200,
@@ -33,10 +32,9 @@ class Api::V1::PostsController < ApiController
   end
 
   def update
-    post_user = User.find_by_authentication_token(params[:auth_token])
     @post = Post.find(params[:id])
 
-    if @post.user == post_user
+    if @post.user == current_user
       @post.update(post_params)
 
       render :json => {
@@ -46,15 +44,14 @@ class Api::V1::PostsController < ApiController
                 :post => @post
               }
     else
-      renedr :json =>{ :message => "Post update failed"}, :status => 401
+      renedr :json =>{ :message => "Post update failed" }, :status => 401
     end  
   end
 
   def destroy
-    post_user = User.find_by_authentication_token(params[:auth_token])
     @post = Post.find(params[:id])
 
-    if @post.user == post_user
+    if @post.user == current_user
       @post.destroy
 
       render :json => {
@@ -62,7 +59,7 @@ class Api::V1::PostsController < ApiController
                 :message => "Post destroied"
               }
     else
-      renedr :json =>{ :message => "Post destroy failed"}, :status => 401
+      renedr :json =>{ :message => "Post destroy failed" }, :status => 401
     end
   end
 

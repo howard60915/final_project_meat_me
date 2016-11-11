@@ -2,7 +2,6 @@ class ApiController < ActionController::Base
 
   before_action :authenticate_user_from_token!
   before_action :enabled_cors
-  before_action :set_default_format
   # after_action :add_after_action
 
   private
@@ -30,10 +29,6 @@ class ApiController < ActionController::Base
     headers['Access-Control-Allow-Headers'] = 'Origin, X-Atmosphere-tracking-id, X-Atmosphere-Framework, X-Cache-Date, Content-Type, X-Atmosphere-Transport, X-Remote, api_key, auth_token, *'
     headers['Access-Control-Request-Method'] = 'GET, POST, PUT, DELETE'
     headers['Access-Control-Request-Headers'] = 'Origin, X-Atmosphere-tracking-id, X-Atmosphere-Framework, X-Cache-Date, Content-Type, X-Atmosphere-Transport,  X-Remote, api_key, *'
-  end
-
-  def set_default_format
-    request.format = 'json'
   end
 
 end

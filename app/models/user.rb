@@ -8,12 +8,11 @@ class User < ApplicationRecord
   has_many :posts
 
   def api_info
-    return {
-      :id => self.id,
-      :email => self.email,
-      :nickname => self.nickname,
-      :bio => self.bio,
-      :admin => self.admin
+    {
+      :userId => self.id,
+      :UserEmail => self.email,
+      :userName => self.nickname,
+      :biography => self.bio
     }
   end
 

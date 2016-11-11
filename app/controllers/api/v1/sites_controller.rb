@@ -21,9 +21,7 @@ class Api::V1::SitesController < ApiController
   end
 
   def create
-    user = User.find_by_authentication_token(params[:auth_token])
-
-    @site = user.sites.new(site_params)
+    @site = current_user.sites.new(site_params)
 
 
     if @site.save
@@ -39,10 +37,9 @@ class Api::V1::SitesController < ApiController
   end
 
   def update
-
-    site_user = User.find_by_authentication_token(params[:auth_token])
      @site = Site.find(params[:id])
-    if @site.user == site_user
+
+    if @site.user == current_user
        @site.update(site_params)
 
        render :json => {
@@ -59,9 +56,8 @@ class Api::V1::SitesController < ApiController
 
   def destroy
       @site = Site.find(params[:id])
-      site_user = User.find_by_authentication_token(params[:auth_token])
 
-      if @site.user == site_user
+      if @site.user == current_user
         @site.destroy
 
         render :json => {
@@ -79,10 +75,6 @@ class Api::V1::SitesController < ApiController
   def site_params
     params.require(:site).permit(:name, :address, :tel, :hotspot, :pictures, :duration)
   end
-
-
-  
-
 
 
 end
