@@ -37,11 +37,9 @@ class Api::V1::SitesController < ApiController
   end
 
   def update
-     @site = Site.find(params[:id])
+     @site = current_user.sites.find(params[:id])
 
-    if @site.user == current_user
-       @site.update(site_params)
-
+    if @site.update(site_params)
        render :json => {
             :status => 200,
             :message => "Site update success",
@@ -55,11 +53,9 @@ class Api::V1::SitesController < ApiController
 
 
   def destroy
-      @site = Site.find(params[:id])
+      @site = current_user.sites.find(params[:id])
 
-      if @site.user == current_user
-        @site.destroy
-
+      if @site.destroy
         render :json => {
                     :status =>200,
                     :message => "Site destroied"

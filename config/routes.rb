@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     post "logout" => "auth#logout"
 
     resources :sites
-    resources :posts
+    resources :posts do
+      resources :comments, :only => [:create, :update, :destroy]
+    end      
   end
 end
