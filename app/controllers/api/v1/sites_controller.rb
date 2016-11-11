@@ -1,5 +1,7 @@
 class Api::V1::SitesController < ApiController
 
+  before_action :authenticate_user!, :only => [:create, :update, :destroy]
+
   def index
     @sites = Site.all
     @users = User.all
