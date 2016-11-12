@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
 
   belongs_to :user
+  has_many :comments, :dependent => :destroy
 
 
   has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
@@ -12,7 +13,8 @@ class Post < ApplicationRecord
       :articletitle => self.title,
       :articlecontent => self.content,
       :articleAuthor => self.user,
-      :articleImage => self.photo.url
+      :articleImage => self.photo.url,
+      :articleDate => self.created_at
     }
   end
 

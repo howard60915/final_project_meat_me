@@ -11,8 +11,8 @@ class Api::V1::PostsController < ApiController
 
   def show
     @post = Post.find(params[:id])
-
-    render :json => { :article => @post.api_info }
+    @comments = @post.comments
+    render :json => { :article => @post.api_info, :articleComments => @comments.map{ |c| c.api_info } }
 
   end
 
@@ -23,7 +23,7 @@ class Api::V1::PostsController < ApiController
       render :json => {
                 :status =>200,
                 :message => "Post created",
-                :auth_token => user.authentication_token,
+                :auth_token => current_user.authentication_token,
                 :post => @post
               }
     else
@@ -32,7 +32,7 @@ class Api::V1::PostsController < ApiController
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post = current_user.posts.find(params[:id])
 
     if @post.user == current_user
       @post.update(post_params)
@@ -40,7 +40,7 @@ class Api::V1::PostsController < ApiController
       render :json => {
                 :status => 200,
                 :message => "Post update success",
-                :auth_token => post_user.authentication_token,
+                :auth_token => current_user.authentication_token,
                 :post => @post
               }
     else
@@ -49,7 +49,7 @@ class Api::V1::PostsController < ApiController
   end
 
   def destroy
-    @post = Post.find(params[:id])
+    @post = current_user.posts.find(params[:id])
 
     if @post.user == current_user
       @post.destroy
