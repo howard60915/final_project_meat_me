@@ -1,6 +1,13 @@
 <h1>Users</h1>
 <ul>
   <% @users.each do |user| %>
-    <li><%= user.email %></li>
+    <li>
+      <%= user.email %>
+      <%= form_for [:admin, user] do |f| %>
+        <%= f.label :admin, "管理員" %>
+        <%= f.check_box :admin %>
+        <%= f.submit "保存" %>
+      <% end %>
+    </li>
   <% end %>
 </ul>

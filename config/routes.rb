@@ -16,6 +16,6 @@ Rails.application.routes.draw do
     resources :sites
     resources :posts do
       resources :comments, :only => [:create, :update, :destroy]
-    end      
+    end
   end
 end
