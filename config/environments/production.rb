@@ -85,4 +85,4 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 end
 
-SITE_DOMAIN = "https://139.162.24.178"
+SITE_DOMAIN = "http://139.162.24.178"
