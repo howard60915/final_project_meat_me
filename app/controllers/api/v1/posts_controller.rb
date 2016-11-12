@@ -28,7 +28,7 @@ class Api::V1::PostsController < ApiController
               }
     else
       render :json => { :message => "Post created failed"}, :status => 401
-    end  
+    end
   end
 
   def update
@@ -45,7 +45,7 @@ class Api::V1::PostsController < ApiController
               }
     else
       renedr :json =>{ :message => "Post update failed" }, :status => 401
-    end  
+    end
   end
 
   def destroy

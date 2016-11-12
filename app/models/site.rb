@@ -15,7 +15,7 @@ class Site < ApplicationRecord
       :telNumber => self.tel,
       :duration => self.duration,
       :hotSpot => self.hotspot,
-      :sitePicture => self.pictures.map{ |p| p.image.url }
+      :sitePicture => self.pictures.map{ |p| "#{SITE_DOMAIN}#{p.image.url}" }
     }
   end
 
