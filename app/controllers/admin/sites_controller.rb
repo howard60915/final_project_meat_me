@@ -38,6 +38,10 @@ class Admin::SitesController < Admin::BaseController
     end
   end
 
+  def show
+    @site = Site.find(params[:id])
+  end
+
   def destroy
     @site = Site.find(params[:id])
     @site.destroy

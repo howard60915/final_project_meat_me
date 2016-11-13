@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     root :to => "index#index"
     resources :sites
     resources :users
+    resources :posts
   end
 
   scope :path => "/api/v1", :module => "api/v1", :as => "v1", :defaults => {:format => :json} do

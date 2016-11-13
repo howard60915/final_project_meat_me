@@ -1,27 +1,40 @@
-<h1>Sites Index</h1>
-<%= link_to '新景點', new_admin_site_path %>
+<div class="container">
+  <div class="row">
+    <h1>Sites Index</h1>
+    <%= link_to '新景點', new_admin_site_path %>
 
-<ul>
-  <% @sites.each do |site| %>
-    <li>
-      <% if site.hotspot %>
-        <span>熱門景點</span>
-      <% end %>
-      <%= site.name %>
-      <%= form_for [:admin, site] do |f| %>
-        <%= f.label :hotspot, "熱門" %>
-        <%= f.check_box :hotspot %>
-        <%= f.submit "保存" %>
-      <% end %>
-      <%= link_to "修改", edit_admin_site_path(site) %>
-      <%= link_to "刪除景點", admin_site_path(site), :method => :delete %>
-    </li>
-    <% if site.pictures.exists? %>
-      <li>
-        <% site.pictures.each do |pic| %>
-          <%= image_tag (pic.image.url(:medium)) %>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>編號</th>
+          <th>名稱</th>
+          <th>熱門</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @sites.each do |site| %>
+        <tr>
+          <td><%= site.id %></td>
+          <td><%= site.name %></td>
+          <td><%= site.hotspot? %></td>
+          <td>
+            <%= form_for [:admin, site] do |f| %>
+              <%= f.label :hotspot, "熱門" %>
+              <%= f.check_box :hotspot %>
+              <%= f.submit "保存" %>
+            <% end %>
+          </td>
+          <td><%= link_to "瀏覽", admin_site_path(site) %></td>
+          <td><%= link_to "修改", edit_admin_site_path(site) %></td>
+          <td><%= link_to "刪除景點", admin_site_path(site), :method => :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
         <% end %>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
+      </tbody>
+    </table>
+    <%= link_to '返回', '/admin', :class => 'btn btn-default' %>
+  </div>
+</div>
