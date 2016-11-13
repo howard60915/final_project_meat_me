@@ -15,7 +15,7 @@ class Api::V1::CommentsController < ApiController
               }
     else
       render :json => { :message => "Comment created failed"}, :status => 401
-    end  
+    end
   end
 
   def update
@@ -31,7 +31,7 @@ class Api::V1::CommentsController < ApiController
     else
       renedr :json =>{ :message => "Comment update failed" }, :status => 401
     end
-    
+
   end
 
   def destroy

@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>景點<%= @site.name %></h1>
+  <% if @site.pictures.exists? %>
+    <% @site.pictures.each do |pic| %>
+      <%= image_tag (pic.image.url(:medium)) %>
+    <% end %>
+  <% end %>
+  <p><%= @site.address %></p>
+  <p><%= @site.tel %></p>
+  <p><%= @site.duration %></p>
+</div>
