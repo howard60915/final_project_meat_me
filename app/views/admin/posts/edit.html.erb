@@ -1,0 +1,12 @@
+<h1>編輯文章</h1>
+<%= form_for [:admin, @post] do |f| %>
+  <%= f.file_field :photo, as: :file %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+
+  <%= f.submit %>
+<% end %>
