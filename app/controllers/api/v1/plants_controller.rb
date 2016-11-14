@@ -17,7 +17,8 @@ class Api::V1::PlantsController < ApiController
   def recognize
     if @results.any?{ |r| r == "cactus" }
       @plant = Plant.find_by_name("cactus")
-      @plants = [Plant.fakesample(1)].push(@plant,Plant.fakesample(1))
+      @plants = Array(Plant.all - [@plant]).sample(2)
+      @plants.push(@plant)
       @posts = @plant.posts
       #@plants = Plant.where( [ "name like ?", "%#{params[:responses]}%" ] ) 
       #@posts = @plants.map{ |p| p.posts }
@@ -31,7 +32,8 @@ class Api::V1::PlantsController < ApiController
                     }
     elsif @results.any?{ |r| r == "Aloe" }
       @plant = Plant.find_by_name("cactus")
-      @plants = [Plant.fakesample(1)].push(@plant,Plant.fakesample(1))
+      @plants = Array(Plant.all - [@plant]).sample(2)
+      @plants.push(@plant)
       @posts = @plant.posts
       @site = Site.last
       render :json => { 
