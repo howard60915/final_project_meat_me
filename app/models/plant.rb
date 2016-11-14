@@ -12,9 +12,8 @@ class Plant < ApplicationRecord
       :plantId => self.id,
       :plantName => self.name,
       :plantDescription => self.description,
-      :plantPicture => self.picture.url
+      :plantPicture => "#{SITE_DOMAIN}#{self.picture.url}"
     }
-    
   end
 
   def self.fakesample(number)
