@@ -17,4 +17,8 @@ class Plant < ApplicationRecord
     
   end
 
+  def self.fakesample(number)
+    Plant.find( (number..(number + 2 )).to_a.sample)
+  end
+
 end
