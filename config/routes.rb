@@ -8,17 +8,18 @@ Rails.application.routes.draw do
     resources :sites
     resources :users
     resources :posts
+    resources :plants
   end
 
   scope :path => "/api/v1", :module => "api/v1", :as => "v1", :defaults => {:format => :json} do
     post "login" => "auth#login"
     post "logout" => "auth#logout"
 
-    resources :plants, :only => [:index, :show] do 
-      collection do 
+    resources :plants, :only => [:index, :show] do
+      collection do
         post :recognize
-      end  
-    end  
+      end
+    end
     resources :sites
     resources :posts do
       resources :comments, :only => [:create, :update, :destroy]

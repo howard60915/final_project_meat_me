@@ -1,0 +1,8 @@
+<h1>Plants Index</h1>
+<%= link_to '新增植物', new_admin_plant_path %>
+<% @plants.each do |plant| %>
+  <p><%= image_tag plant.picture.url %></p>
+  <p><%= plant.name %></p>
+  <p><%= plant.description %></p>
+  <%= link_to "刪除", admin_plant_path(plant), :method => :delete %>
+<% end %>

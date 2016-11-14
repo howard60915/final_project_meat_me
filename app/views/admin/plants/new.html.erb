@@ -2,19 +2,19 @@
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-      <h1>新增文章</h1>
-      <%= form_for [:admin, @post] do |f| %>
+      <h1>新增植物</h1>
+      <%= form_for [:admin, @plant] do |f| %>
         <div class="form-group">
-          <%= f.file_field :photo, as: :file %>
+          <%= f.file_field :picture, as: :file %>
         </div>
         <div class="form-group">
-          <%= f.label :title %>
-          <%= f.text_field :title, :class => "form-control" %>
+          <%= f.label :name %>
+          <%= f.text_field :name, :class => "form-control" %>
         </div>
 
         <div class="form-group">
-          <%= f.label :content %>
-          <%= f.text_area :content, :class => "form-control" %>
+          <%= f.label :description %>
+          <%= f.text_area :description, :class => "form-control" %>
         </div>
 
         <div class="form-actions">
