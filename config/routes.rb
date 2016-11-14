@@ -14,6 +14,11 @@ Rails.application.routes.draw do
     post "login" => "auth#login"
     post "logout" => "auth#logout"
 
+    resources :plants, :only => [:index, :show] do 
+      collection do 
+        post :recognize
+      end  
+    end  
     resources :sites
     resources :posts do
       resources :comments, :only => [:create, :update, :destroy]
