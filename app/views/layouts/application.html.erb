@@ -26,6 +26,7 @@
             <li><%= link_to '用戶', admin_users_path %></li>
             <li><%= link_to '景點', admin_sites_path %></li>
             <li><%= link_to '文章', admin_posts_path %></li>
+            <li><%= link_to '植物', admin_plants_path %></li>
             <% if current_user %>
               <li><%= link_to '登出', destroy_user_session_path, method: :delete %></li>
               <li><%= link_to('修改密碼', edit_registration_path(:user)) %></li>
