@@ -16,39 +16,37 @@ class Api::V1::PlantsController < ApiController
 
   def recognize
     if @results.any?{ |r| r == "plant" }
-        if @results.any?{ |r| r == "cactus" }
-          @plant = Plant.find_by_name("cactus")
-          @plants = Array(Plant.all - [@plant]).sample(2)
-          @plants.push(@plant)
+        if @results.any?{ |r| r == "hedgehog cactus" }
+          @plant = Plant.find_by_description("仙人掌")
+          @plants = Plant.where( [ "name like ?", "hedgehog cactus" ] )
           @posts = @plant.posts
           #@plants = Plant.where( [ "name like ?", "%#{params[:responses]}%" ] )
           #@posts = @plants.map{ |p| p.posts }
-          @site = Site.last
-          render :json => {
-                          :message => "Plant has been recognized",
+          @site = @plant.sites
+          render :json => { 
+                          :message => "isMeat",
                           :plants => @plants.map{ |p| p.api_info },
                           #:plantsPosts => @posts.map{|p| p.each{|o| o.api_info } },
                           :plantsPosts => @posts.map{|p| p.api_info },
-                          :plantsSite =>  @site.api_info
-                        }
-        elsif @results.any?{ |r| r == "Aloe" }
-          @plant = Plant.find_by_name("Aloe")
-          @plants = Array(Plant.all - [@plant]).sample(2)
-          @plants.push(@plant)
-          @posts = @plant.posts
-          @site = Site.last
-          render :json => {
-                          :message => "Plant has been recognized",
-                          :plants => @plants.map{ |p| p.api_info },
-                          #:plantsPosts => @posts.map{|p| p.each{|o| o.api_info } },
-                          :plantsPosts => @posts.map{|p| p.api_info },
-                          :plantsSite =>  @site.api_info
+                          :plantsSite =>  @site.map{ |s| s.api_info }
                         }
         else
-          render :json => { :message => "您拍的好像不是多肉植物喔，請再拍一次～～"}
+          @plant = Plant.find_by_description("熊童子")
+          @plants = Plant.where( [ "name like ?", "other" ] )
+          @posts = @plant.posts
+          @site = @plant.sites
+          render :json => { 
+                          :message => "isMeat",
+                          :plants => @plants.map{ |p| p.api_info },
+                          #:plantsPosts => @posts.map{|p| p.each{|o| o.api_info } },
+                          :plantsPosts => @posts.map{|p| p.api_info },
+                          :plantsSite =>  @site.map{ |s| s.api_info }
+                        } 
         end
-      else
-      render :json => { :message => "您拍的不是植物喔，請再拍一次"}
+    elsif @results.any?{ |r| r == "face" }
+      render :json => { :message => "isPerson"}        
+    else 
+      render :json => { :message => "notPlant"}
     end
   end
 
@@ -56,5 +54,5 @@ class Api::V1::PlantsController < ApiController
 
   def set_recognize_result
    @results = params[:responses].first[:labelAnnotations].map{ |r| r[:description] } if params[:responses]
-  end
+  end 
 end
