@@ -15,40 +15,40 @@ class Api::V1::PlantsController < ApiController
   end
 
   def recognize
-    if @results.any?{ |r| r == "cactus" }
-      @plant = Plant.find_by_name("cactus")
-      @plants = Array(Plant.all - [@plant]).sample(2)
-      @plants.push(@plant)
-      @posts = @plant.posts
-      #@plants = Plant.where( [ "name like ?", "%#{params[:responses]}%" ] ) 
-      #@posts = @plants.map{ |p| p.posts }
-      @site = Site.last
-      # byebug
-      render :json => { 
-                      :plants => @plants.map{ |p| p.api_info },
-                      #:plantsPosts => @posts.map{|p| p.each{|o| o.api_info } },
-                      :plantsPosts => @posts.map{|p| p.api_info },
-                      :plantsSite =>  @site.api_info 
-                    }
-    elsif @results.any?{ |r| r == "Aloe" }
-      @plant = Plant.find_by_name("cactus")
-      @plants = Array(Plant.all - [@plant]).sample(2)
-      @plants.push(@plant)
-      @posts = @plant.posts
-      @site = Site.last
-      render :json => { 
-                      :plants => @plants.map{ |p| p.api_info },
-                      #:plantsPosts => @posts.map{|p| p.each{|o| o.api_info } },
-                      :plantsPosts => @posts.map{|p| p.api_info },
-                      :plantsSite =>  @site.api_info 
-                    }
-    elsif @results.any?{ |r| r != "plant" }
-      render :json => { :message => "您拍的不是植物喔，請再拍一次"}
+    if @results.any?{ |r| r == "plant" }
+      if @results.any?{ |r| r == "cactus" }
+        @plant = Plant.find_by_name("cactus")
+        @plants = Array(Plant.all - [@plant]).sample(2)
+        @plants.push(@plant)
+        @posts = @plant.posts
+        #@plants = Plant.where( [ "name like ?", "%#{params[:responses]}%" ] ) 
+        #@posts = @plants.map{ |p| p.posts }
+        @site = Site.last
+        render :json => { 
+                        :message => "Plant has been recognized",
+                        :plants => @plants.map{ |p| p.api_info },
+                        #:plantsPosts => @posts.map{|p| p.each{|o| o.api_info } },
+                        :plantsPosts => @posts.map{|p| p.api_info },
+                        :plantsSite =>  @site.api_info 
+                      }
+      elsif @results.any?{ |r| r == "Aloe" }
+        @plant = Plant.find_by_name("Aloe")
+        @plants = Array(Plant.all - [@plant]).sample(2)
+        @plants.push(@plant)
+        @posts = @plant.posts
+        @site = Site.last
+        render :json => { 
+                        :message => "Plant has been recognized",
+                        :plants => @plants.map{ |p| p.api_info },
+                        #:plantsPosts => @posts.map{|p| p.each{|o| o.api_info } },
+                        :plantsPosts => @posts.map{|p| p.api_info },
+                        :plantsSite =>  @site.api_info 
+                      }
+      else
+        render :json => { :message => "您拍的好像不是多肉植物喔，請再拍一次～～"} 
+      end
     else 
-    @plants = Plant.all
-
-    render :json => { :plants => @plants.map{ |p| p.api_info } }
-    end 
+    render :json => { :message => "您拍的不是植物喔，請再拍一次"} 
   end
 
   private
