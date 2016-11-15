@@ -43,7 +43,7 @@ class Api::V1::PlantsController < ApiController
                           :plantsSite =>  @site.map{ |s| s.api_info }
                         } 
         end
-    elsif @results.any?{ |r| r == "face" }
+    elsif @results.any?{ |r| r == "face" || r == "person" || r == "hair" || r == "human" } 
       render :json => { :message => "isPerson"}        
     else 
       render :json => { :message => "notPlant"}
