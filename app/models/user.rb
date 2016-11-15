@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :posts, :dependent => :destroy
   has_many :comments, :dependent => :destroy
 
+  has_many :like_sites, :dependent => :destroy
+  has_many :liked_sites, -> { distinct }, :through => like_sites, :source => :site
+
   def api_info
     {
       :userId => self.id,

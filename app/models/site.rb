@@ -4,6 +4,12 @@ class Site < ApplicationRecord
 
   has_many :pictures, :dependent => :destroy
 
+  has_many :site_plantships, :dependent => :destroy
+  has_many :plants, :through => :site_plantships
+
+  has_many :like_sites, :dependent => :destroy
+  has_many :liked_by, :through => :like_sites, :source => :user
+
 
 
 
