@@ -25,18 +25,20 @@ class Api::V1::PlantsController < ApiController
       @site = Site.last
       # byebug
       render :json => { 
+                      :message => "Plant has been recognized",
                       :plants => @plants.map{ |p| p.api_info },
                       #:plantsPosts => @posts.map{|p| p.each{|o| o.api_info } },
                       :plantsPosts => @posts.map{|p| p.api_info },
                       :plantsSite =>  @site.api_info 
                     }
     elsif @results.any?{ |r| r == "Aloe" }
-      @plant = Plant.find_by_name("cactus")
+      @plant = Plant.find_by_name("Aloe")
       @plants = Array(Plant.all - [@plant]).sample(2)
       @plants.push(@plant)
       @posts = @plant.posts
       @site = Site.last
       render :json => { 
+                      :message => "Plant has been recognized",
                       :plants => @plants.map{ |p| p.api_info },
                       #:plantsPosts => @posts.map{|p| p.each{|o| o.api_info } },
                       :plantsPosts => @posts.map{|p| p.api_info },
