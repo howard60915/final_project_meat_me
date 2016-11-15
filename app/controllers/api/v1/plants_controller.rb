@@ -20,7 +20,7 @@ class Api::V1::PlantsController < ApiController
           @plant = Plant.find_by_description("仙人掌")
           @plants = Plant.where( [ "name like ?", "hedgehog cactus" ] )
           @posts = @plant.posts
-          #@plants = Plant.where( [ "name like ?", "%#{params[:responses]}%" ] ) 
+          #@plants = Plant.where( [ "name like ?", "%#{params[:responses]}%" ] )
           #@posts = @plants.map{ |p| p.posts }
           @site = @plant.sites
           render :json => { 
@@ -43,10 +43,10 @@ class Api::V1::PlantsController < ApiController
                           :plantsSite =>  @site.map{ |s| s.api_info }
                         } 
         end
-      elsif @results.any?{ |r| r == "face" }
-        render :json => { :message => "isPerson"}        
-      else 
-        render :json => { :message => "notPlant"}
+    elsif @results.any?{ |r| r == "face" }
+      render :json => { :message => "isPerson"}        
+    else 
+      render :json => { :message => "notPlant"}
     end
   end
 
@@ -54,5 +54,5 @@ class Api::V1::PlantsController < ApiController
 
   def set_recognize_result
    @results = params[:responses].first[:labelAnnotations].map{ |r| r[:description] } if params[:responses]
-  end
+  end 
 end
