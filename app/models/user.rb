@@ -13,11 +13,17 @@ class User < ApplicationRecord
   has_many :liked_sites, -> { distinct }, :through => :like_sites, :source => :site
 
   def api_info
+    avatarUrl = [
+      'https://c5.staticflickr.com/6/5568/22842328868_5eedf8e61a.jpg',
+      'https://c3.staticflickr.com/6/5645/22842328338_4e0ef78181.jpg',
+      'https://c1.staticflickr.com/6/5451/22842327648_1321a9b888.jpg'
+    ]
     {
       :userId => self.id,
-      :UserEmail => self.email,
+      :userEmail => self.email,
       :userName => self.nickname,
-      :biography => self.bio
+      :biography => self.bio,
+      :userAvatar => avatarUrl.sample
     }
   end
 
