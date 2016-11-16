@@ -18,32 +18,28 @@ class Api::V1::PlantsController < ApiController
     if @results.any?{ |r| r == "plant" }
         if @results.any?{ |r| r == "hedgehog cactus" }
           @plant = Plant.find_by_description("仙人掌")
-          @plants = Plant.where( [ "name like ?", "hedgehog cactus" ] )
+          @plants = Array(Plant.where( [ "name like ?", "hedgehog cactus" ] ) - [@plant]).sample(2).push(@plant)
           @posts = @plant.posts
-          #@plants = Plant.where( [ "name like ?", "%#{params[:responses]}%" ] )
-          #@posts = @plants.map{ |p| p.posts }
           @site = @plant.sites
           render :json => { 
                           :message => "isMeat",
                           :plants => @plants.map{ |p| p.api_info },
-                          #:plantsPosts => @posts.map{|p| p.each{|o| o.api_info } },
                           :plantsPosts => @posts.map{|p| p.api_info },
                           :plantsSite =>  @site.map{ |s| s.api_info }
                         }
         else
           @plant = Plant.find_by_description("熊童子")
-          @plants = Plant.where( [ "name like ?", "other" ] )
+          @plants = Array(Plant.where( [ "name like ?", "other" ] ) - [@plant]).sample(2).unshift(@plant)
           @posts = @plant.posts
           @site = @plant.sites
           render :json => { 
                           :message => "isMeat",
                           :plants => @plants.map{ |p| p.api_info },
-                          #:plantsPosts => @posts.map{|p| p.each{|o| o.api_info } },
                           :plantsPosts => @posts.map{|p| p.api_info },
                           :plantsSite =>  @site.map{ |s| s.api_info }
-                        } 
+                          }
         end
-    elsif @results.any?{ |r| r == "face" || r == "person" || r == "hair" || r == "human" } 
+    elsif @results.any?{ |r| r == "face" || r == "person" || r == "hair" || r == "human" || r == "facial expression" || r == "hair style" || r == "muscle" } 
       render :json => { :message => "isPerson"}        
     else 
       render :json => { :message => "notPlant"}

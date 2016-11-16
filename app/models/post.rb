@@ -12,11 +12,13 @@ class Post < ApplicationRecord
   def api_info
     return {
       :articleId => self.id.to_s,
-      :articletitle => self.title,
-      :articlecontent => self.content,
+      :articleTitle => self.title,
+      :articleContent => self.content,
       :articleAuthor => self.user,
       :articleImage => self.photo.url,
-      :articleDate => self.created_at
+      :articleDate => self.created_at,
+      :articleLoveNumber => [],
+      :articleCommentNumber => self.comments.count
     }
   end
 
