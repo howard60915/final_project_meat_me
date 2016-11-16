@@ -18,6 +18,21 @@ class Admin::PlantsController < Admin::BaseController
     end
   end
 
+  def edit
+    @plant = Plant.find(params[:id])
+  end
+
+  def update
+    @plant = Plant.find(params[:id])
+    if @plant.update(params_plant)
+      flash[:notice] = "植物更新成功"
+      redirect_to admin_plants_path
+    else
+      flash[:alert] = "植物更新失敗"
+      render 'edit'
+    end
+  end
+
   def destroy
     @plant = Plant.find(params[:id])
     @plant.destroy
