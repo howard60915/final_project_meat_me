@@ -8,4 +8,9 @@
   <p><%= @site.address %></p>
   <p><%= @site.tel %></p>
   <p><%= @site.duration %></p>
+  <p>
+    <% @site.plants.each do |plant| %>
+      <%= plant.name %>
+    <% end %>
+  </p>
 </div>

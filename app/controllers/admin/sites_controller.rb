@@ -51,6 +51,6 @@ class Admin::SitesController < Admin::BaseController
 
   private
   def params_site
-    params.require(:site).permit(:name, :address, :tel, :hotspot, :pictures, :duration)
+    params.require(:site).permit(:name, :address, :tel, :hotspot, :pictures, :duration, :plant_ids => [])
   end
 end

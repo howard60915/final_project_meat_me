@@ -1,12 +1,30 @@
-<h1>編輯文章</h1>
-<%= form_for [:admin, @post] do |f| %>
-  <%= f.file_field :photo, as: :file %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h1>編輯文章</h1>
+      <%= form_for [:admin, @post] do |f| %>
+        <div class="form-group">
+          <%= f.file_field :photo, as: :file %>
+        </div>
+        <div class="form-group">
+          <%= f.label :title %>
+          <%= f.text_field :title, :class => "form-control" %>
+        </div>
 
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+        <div class="form-group">
+          <%= f.label :content %>
+          <%= f.text_area :content, :class => "form-control" %>
+        </div>
 
-  <%= f.label :content %>
-  <%= f.text_field :content %>
+        <div class="form-group">
+            <%= f.collection_check_boxes(:plant_ids, Plant.all, :id, :name) %>
+        </div>
 
-  <%= f.submit %>
-<% end %>
+        <div class="form-actions">
+          <%= f.submit :class => "btn btn-default" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

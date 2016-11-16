@@ -4,5 +4,6 @@
   <div id='plant_img'><%= image_tag plant.picture.url, :class => 'plant_img' %></div>
   <p><%= plant.name %></p>
   <p><%= plant.description %></p>
+  <%= link_to "修改", edit_admin_plant_path(plant) %>
   <%= link_to "刪除", admin_plant_path(plant), :method => :delete %>
 <% end %>
