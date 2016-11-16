@@ -6,7 +6,7 @@
   <p><%= post.content %></p>
   <p>
     <% post.plants.each do |plant| %>
-      <%= plant.name %>
+      <%= plant.description %>
     <% end %>
   </p>
   <%= link_to "修改", edit_admin_post_path(post) %>
