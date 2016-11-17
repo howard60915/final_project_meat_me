@@ -17,11 +17,11 @@ class Api::V1::PlantsController < ApiController
   def recognize
     if @results.any?{ |r| r == "plant" }
         if @results.any?{ |r| r == "hedgehog cactus" }
-          @plant = Plant.find_by_description("仙人掌")
+          @plant = Plant.find_by_description("金琥仙人球")
           @plants = Array(Plant.where( [ "name like ?", "hedgehog cactus" ] ) - [@plant]).sample(2).push(@plant)
           @posts = @plant.posts
           @site = @plant.sites
-          render :json => { 
+          render :json => {
                           :message => "isMeat",
                           :plants => @plants.map{ |p| p.api_info },
                           :plantsPosts => @posts.map{|p| p.api_info },
@@ -32,16 +32,16 @@ class Api::V1::PlantsController < ApiController
           @plants = Array(Plant.where( [ "name like ?", "other" ] ) - [@plant]).sample(2).unshift(@plant)
           @posts = @plant.posts
           @site = @plant.sites
-          render :json => { 
+          render :json => {
                           :message => "isMeat",
                           :plants => @plants.map{ |p| p.api_info },
                           :plantsPosts => @posts.map{|p| p.api_info },
                           :plantsSite =>  @site.map{ |s| s.api_info }
                           }
         end
-    elsif @results.any?{ |r| r == "face" || r == "person" || r == "hair" || r == "human" || r == "facial expression" || r == "hair style" || r == "muscle" } 
-      render :json => { :message => "isPerson"}        
-    else 
+    elsif @results.any?{ |r| r == "face" || r == "person" || r == "hair" || r == "human" || r == "facial expression" || r == "hair style" || r == "muscle" }
+      render :json => { :message => "isPerson"}
+    else
       render :json => { :message => "notPlant"}
     end
   end
@@ -50,5 +50,5 @@ class Api::V1::PlantsController < ApiController
 
   def set_recognize_result
    @results = params[:responses].first[:labelAnnotations].map{ |r| r[:description] } if params[:responses]
-  end 
+  end
 end
