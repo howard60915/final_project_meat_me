@@ -1,7 +1,7 @@
 <h1>文章列表</h1>
 <%= link_to "新增文章", new_admin_post_path %>
 <% @posts.each do |post| %>
-  <p><%= image_tag post.photo.url %></p>
+  <div id='plant_img'><%= image_tag post.photo.url, :class => 'plant_img' %></div>
   <p><%= post.title %></p>
   <p><%= post.content %></p>
   <p>
