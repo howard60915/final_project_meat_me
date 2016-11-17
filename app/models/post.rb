@@ -10,14 +10,15 @@ class Post < ApplicationRecord
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
 
   def api_info
+    nameList = ["OhNO", "Chrisrtine", "Justin", "Jacob", "Howard"]
     return {
       :articleId => self.id.to_s,
       :articleTitle => self.title,
       :articleContent => self.content,
-      :articleAuthor => self.user,
-      :articleImage => self.photo.url,
-      :articleDate => self.created_at,
-      :articleLoveNumber => [],
+      :articleAuthorName => nameList.sample,
+      :articleImage => "#{SITE_DOMAIN}#{self.photo.url}",
+      :articleDate => self.created_at.strftime("%Y.%m.%d"),
+      :articleLoveNumber => (10..30).to_a.sample,
       :articleCommentNumber => self.comments.count
     }
   end
