@@ -8,10 +8,10 @@ class Comment < ApplicationRecord
   def api_info
     nameList = ["OhNO", "Chrisrtine", "Justin", "Jacob", "Howard"]
     {
-      :commentId => self.id,
-      :commentContent => self.content,
-      :commentAuthor => nameList.sample,
-      :commentCreatedAt => self.created_at
+      :articleCommentId => self.id,
+      :articleCommentContent => self.content,
+      :articleCommentAuthor => nameList.sample,
+      :articleCommentCreatedAt => self.created_at
     }
   end
 end

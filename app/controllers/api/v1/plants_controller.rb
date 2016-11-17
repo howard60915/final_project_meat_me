@@ -24,7 +24,7 @@ class Api::V1::PlantsController < ApiController
           render :json => {
                           :message => "isMeat",
                           :plants => @plants.map{ |p| p.api_info },
-                          :plantsPosts => @posts.map{|p| p.api_info },
+                          :plantArticles => @posts.map{|p| p.api_info },
                           :plantsSite =>  @site.map{ |s| s.api_info }
                         }
         else
@@ -35,7 +35,7 @@ class Api::V1::PlantsController < ApiController
           render :json => {
                           :message => "isMeat",
                           :plants => @plants.map{ |p| p.api_info },
-                          :plantsPosts => @posts.map{|p| p.api_info },
+                          :plantArticles => @posts.map{|p| p.api_info },
                           :plantsSite =>  @site.map{ |s| s.api_info }
                           }
         end
