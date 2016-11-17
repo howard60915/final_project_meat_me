@@ -1,0 +1,17 @@
+<h1>文章內容</h1>
+<p><%= @post.title %></p>
+<p><%= @post.content %></p>
+<h3>評論</h3>
+<p>
+  <% @post.comments.each do |comment| %>
+    <p><%= comment.content %></p>
+    <%= link_to "刪除", admin_post_comment_path(@post, comment), :method => :delete %>
+  <% end %>
+</p>
+
+<%= form_for [:admin, @post, @comment] do |f| %>
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+
+  <%= f.submit %>
+<% end %>

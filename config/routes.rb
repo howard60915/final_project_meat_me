@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     root :to => "index#index"
     resources :sites
     resources :users
-    resources :posts
+    resources :posts do
+      resources :comments
+    end
     resources :plants
   end
 

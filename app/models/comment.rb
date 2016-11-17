@@ -6,10 +6,11 @@ class Comment < ApplicationRecord
   belongs_to :post
 
   def api_info
+    nameList = ["OhNO", "Chrisrtine", "Justin", "Jacob", "Howard"]
     {
       :commentId => self.id,
       :commentContent => self.content,
-      :commentAuthor => self.user.nickname,
+      :commentAuthor => nameList.sample,
       :commentCreatedAt => self.created_at
     }
   end

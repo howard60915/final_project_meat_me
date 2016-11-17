@@ -3,6 +3,11 @@ class Admin::PostsController < Admin::BaseController
     @posts = Post.all
   end
 
+  def show
+    @post = Post.find(params[:id])
+    @comment = Comment.new
+  end
+
   def new
     @post = current_user.posts.new
   end
