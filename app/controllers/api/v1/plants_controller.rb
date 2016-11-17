@@ -18,7 +18,7 @@ class Api::V1::PlantsController < ApiController
     if @results.any?{ |r| r == "plant" }
         if @results.any?{ |r| r == "hedgehog cactus" }
           @plant = Plant.find_by_description("金琥仙人球")
-          @plants = Array(Plant.where( [ "name like ?", "hedgehog cactus" ] ) - [@plant]).sample(2).push(@plant)
+          @plants = Array(Plant.where( [ "name like ?", "hedgehog cactus" ] ) - [@plant]).sample(2).unshift(@plant)
           @posts = @plant.posts
           @site = @plant.sites
           render :json => {
