@@ -11,7 +11,7 @@ class Comment < ApplicationRecord
       :articleCommentId => self.id,
       :articleCommentContent => self.content,
       :articleCommentAuthor => nameList.sample,
-      :articleCommentCreatedAt => self.created_at
+      :articleCommentDate => self.created_at.strftime("%Y.%m.%d")
     }
   end
 end
