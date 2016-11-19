@@ -21,7 +21,7 @@ class Post < ApplicationRecord
       :articleTitle => self.title,
       :articleContent => self.content,
       :articleAuthorName => nameList.sample,
-      :articleAuthorImage => avatarUrl,
+      :articleAuthorImage => avatarUrl.sample,
       :articleImage => "#{SITE_DOMAIN}#{self.photo.url}",
       :articleDate => self.created_at.strftime("%Y.%m.%d"),
       :articleLoveNumber => (10..30).to_a.sample,
