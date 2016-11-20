@@ -10,7 +10,7 @@ class Post < ApplicationRecord
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
 
   def api_info
-    nameList = ["OhNO", "Chrisrtine", "Justin", "Jacob", "Howard"]
+    nameList = ["OhNO", "Christine", "Justin", "Jacob", "Howard"]
     avatarUrl = [
       'https://c5.staticflickr.com/6/5568/22842328868_5eedf8e61a.jpg',
       'https://c3.staticflickr.com/6/5645/22842328338_4e0ef78181.jpg',
