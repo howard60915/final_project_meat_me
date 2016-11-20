@@ -11,7 +11,7 @@ class Comment < ApplicationRecord
       'https://c3.staticflickr.com/6/5645/22842328338_4e0ef78181.jpg',
       'https://c1.staticflickr.com/6/5451/22842327648_1321a9b888.jpg'
     ]
-    nameList = ["OhNO", "Christine", "Justin", "Jacob", "Howard"]
+    nameList = ["OhNO", "Christine", "Justin", "Jacob", "Howard", "Pempas", "Ollie", "PCboy", "BirdBrother", "Dan", "Danny", "Alvin", "Miri", "Peter", "Winne", "Hong", "Bambi", "Michel", "Mark" ]
     {
       :articleCommentId => self.id,
       :articleCommentContent => self.content,
