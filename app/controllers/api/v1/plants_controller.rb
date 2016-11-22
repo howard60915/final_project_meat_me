@@ -17,7 +17,7 @@ class Api::V1::PlantsController < ApiController
   def recognize
     if @results.any?{ |r| r == "plant" }
         if @results.any?{ |r| r == "hedgehog cactus" }
-          @plant = Plant.find_by_description("金琥仙人球")
+          @plant = Plant.find_by_description("白龍丸")
           @plants = Array(Plant.where( [ "name like ?", "hedgehog cactus" ] ) - [@plant]).sample(2).unshift(@plant)
           @posts = @plant.posts
           @site = @plant.sites
