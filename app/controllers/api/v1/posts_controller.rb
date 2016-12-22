@@ -32,7 +32,7 @@ class Api::V1::PostsController < ApiController
   end
 
   def update
-    @post = current_user.posts.find(params[:id])
+    @post = Post.find(params[:id])
 
     if @post.user == current_user
       @post.update(post_params)
@@ -44,12 +44,12 @@ class Api::V1::PostsController < ApiController
                 :post => @post
               }
     else
-      renedr :json =>{ :message => "Post update failed" }, :status => 401
+      render :json =>{ :message => "Post update failed" }, :status => 401
     end
   end
 
   def destroy
-    @post = current_user.posts.find(params[:id])
+    @post = Post.find(params[:id])
 
     if @post.user == current_user
       @post.destroy
@@ -59,7 +59,7 @@ class Api::V1::PostsController < ApiController
                 :message => "Post destroied"
               }
     else
-      renedr :json =>{ :message => "Article destroy failed" }, :status => 401
+      render :json =>{ :message => "Post destroy failed" }, :status => 401
     end
   end
 

@@ -22,7 +22,7 @@ class Post < ApplicationRecord
       :articleContent => self.content,
       :articleAuthorName => nameList.sample,
       :articleAuthorImage => avatarUrl.sample,
-      :articleImage => "#{SITE_DOMAIN}#{self.photo.url}",
+      :articleImage => self.photo.url,   #production =>  "#{SITE_DOMAIN}#{self.photo.url}",
       :articleDate => self.created_at.strftime("%Y.%m.%d"),
       :articleLoveNumber => (10..30).to_a.sample,
       :articleCommentNumber => self.comments.count
