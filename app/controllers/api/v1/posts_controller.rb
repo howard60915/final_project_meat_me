@@ -12,7 +12,7 @@ class Api::V1::PostsController < ApiController
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments
-    render :json => { :plantArticles => @post.api_info, :palntArticleComments => @comments.map{ |c| c.api_info } }
+    render :json => { :plantArticles => @post.api_info, :plantArticleComments => @comments.map{ |c| c.api_info } }
 
   end
 

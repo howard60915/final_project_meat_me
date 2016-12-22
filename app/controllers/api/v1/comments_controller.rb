@@ -19,9 +19,10 @@ class Api::V1::CommentsController < ApiController
   end
 
   def update
-    @comment = current_user.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
 
-    if @comment.update(comment_params)
+    if @comment.user == current_user && comment_params[:content] != ""
+      @comment.update(comment_params)
       render :json => {
                 :status => 200,
                 :message => "Comment update success",
@@ -29,21 +30,22 @@ class Api::V1::CommentsController < ApiController
                 :comment => @comment
               }
     else
-      renedr :json =>{ :message => "Comment update failed" }, :status => 401
+      render :json =>{ :message => "Comment update failed" }, :status => 401
     end
 
   end
 
   def destroy
-    @comment = current_user.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
 
-    if @comment.destroy
+    if @comment.user == current_user
+      @comment.destroy
       render :json => {
                 :status => 200,
                 :message => "Comment destroied"
               }
     else
-      renedr :json =>{ :message => "Comment destroy failed" }, :status => 401
+      render :json =>{ :message => "Comment destroy failed" }, :status => 401
     end
   end
 
