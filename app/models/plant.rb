@@ -15,7 +15,7 @@ class Plant < ApplicationRecord
       :plantId => self.id,
       :plantName => self.name,
       :plantDescription => self.description,
-      :plantPicture => "#{SITE_DOMAIN}#{self.picture.url}"
+      :plantPicture => self.picture.url #"#{SITE_DOMAIN}#{self.picture.url}"
     }
   end
 
