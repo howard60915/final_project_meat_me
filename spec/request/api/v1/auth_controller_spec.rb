@@ -38,7 +38,6 @@ RSpec.describe Api::V1::AuthController, type: :request do
 
     it "logout success" do 
       old_auth_token = old_user.authentication_token
-      byebug
       post '/api/v1/logout', :auth_token => old_auth_token 
 
       expect(response).to have_http_status(200)

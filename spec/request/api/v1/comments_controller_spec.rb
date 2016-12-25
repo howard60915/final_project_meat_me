@@ -34,7 +34,7 @@ RSpec.describe Api::V1::CommentsController, type: :request do
       expect(response).to have_http_status(401)
     end
 
-    it 'create failed with nil content ' do
+    it 'create failed with validates' do
       post "/api/v1/posts/#{posted.id}/comments", params: { 
                                                               :auth_token => auth_user.authentication_token, 
                                                               :comment => { :content => "" }
@@ -77,6 +77,7 @@ RSpec.describe Api::V1::CommentsController, type: :request do
                                                             :auth_token => auth_user.authentication_token,
                                                             :comment => { :content => "" }
                                                           }
+
       expect(response).to have_http_status(401)
       expect(JSON.parse(response.body)["message"]).to eq("Comment update failed")
     end  

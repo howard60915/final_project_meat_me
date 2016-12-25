@@ -1,5 +1,8 @@
 class Site < ApplicationRecord
-  validates_presence_of :name, :address, :tel
+  validates :name, presence: true ,uniqueness: true
+  validates :address, presence: true
+  validates :tel, presence: true
+
   belongs_to :user
 
   has_many :pictures, :dependent => :destroy
